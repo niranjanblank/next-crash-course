@@ -8,12 +8,12 @@ import Link from "next/link";
 
 const Nav:React.FC = () => {
     return ( 
-    <ul className="flex p-4 bg-green-600 text-white ">
+    <ul className="flex p-4 justify-center ">
         <li className="mr-6">
-        <Link className=" hover:text-blue-800" href="/">Active</Link>
+        <Link className=" text-blue-500 hover:text-blue-800" href="/">Active</Link>
         </li>
         <li className="mr-6">
-        <Link className=" hover:text-blue-800" href="/about">Link</Link>
+        <Link className=" text-blue-500 hover:text-blue-800" href="/about">About</Link>
         </li>
         
   </ul> );

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+import ArticleItem from '@/components/ArticleItem'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,14 +20,7 @@ const Home:React.FC<HomeProp> = ({articles}) => {
     <div className="flex  flex-col justify-center items-center">
       {articles.map((article:any)=> {
         return (
-          <div className="p-4 my-2 rounded-lg w-3/5 border-solid border-2 bg-red-20" key={article.id}>
-            <h3 className="font-bold" >
-              {article.title}
-            </h3>
-            <p>
-              {article.body}
-            </p>
-          </div>
+         <ArticleItem article={article} key={article.id} />
         )
       })}
     </div>
