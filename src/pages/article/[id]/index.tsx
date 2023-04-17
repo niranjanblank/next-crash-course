@@ -38,7 +38,20 @@ export default function article({article}: Props) {
 // preview: a boolean value indicating whether the page is being previewed.
 // You can use the context object to fetch data based on the query parameters or the dynamic route parameters, or to handle server-side redirection or authentication.
 
-export const getServerSideProps = async (context: any) => {
+// export const getServerSideProps = async (context: any) => {
+//     const res = await fetch(`https:\jsonplaceholder.typicode.com/posts/${context.params.id}`)
+
+//     const article = await res.json()
+
+//     return {
+//         props: {
+//             article
+//         }
+//     }
+// }
+
+
+export const getStaticProps = async (context: any) => {
     const res = await fetch(`https:\jsonplaceholder.typicode.com/posts/${context.params.id}`)
 
     const article = await res.json()
@@ -47,5 +60,25 @@ export const getServerSideProps = async (context: any) => {
         props: {
             article
         }
+    }
+}
+
+
+// In order for getStaticPaths to work, you need to implement getStaticProps in the same file, and return the data for each individual page as props.
+export const getStaticPaths = async () => {
+    const res = await fetch(`https:\jsonplaceholder.typicode.com/posts`)
+
+    const articles = await res.json()
+    console.log(articles)
+    // getting ids of each article
+    const ids = articles.map((article: any) => article.id)
+    const paths = ids.map((id: any) => ({
+        params: {id: id.toString()}
+    }))
+    return {
+        paths: paths,
+        // returns a 404 page if we go to something that doesnt exist
+        fallback: false,
+
     }
 }
