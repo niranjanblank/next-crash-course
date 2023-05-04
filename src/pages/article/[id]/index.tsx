@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {server} from '../../../../config'
 // to access the id that is passed through the link
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -52,7 +52,7 @@ export default function article({article}: Props) {
 
 
 export const getStaticProps = async (context: any) => {
-    const res = await fetch(`https:\jsonplaceholder.typicode.com/posts/${context.params.id}`)
+    const res = await fetch(`${server}/api/articles/${context.params.id}`)
 
     const article = await res.json()
 
@@ -66,7 +66,7 @@ export const getStaticProps = async (context: any) => {
 
 // In order for getStaticPaths to work, you need to implement getStaticProps in the same file, and return the data for each individual page as props.
 export const getStaticPaths = async () => {
-    const res = await fetch(`https:/jsonplaceholder.typicode.com/posts?_limit=6`)
+    const res = await fetch(`${server}/api/articles`)
 
     const articles = await res.json()
     console.log(articles)
@@ -81,4 +81,37 @@ export const getStaticPaths = async () => {
         fallback: false,
 
     }
+
+
+
+// export const getStaticProps = async (context: any) => {
+//     const res = await fetch(`https:\jsonplaceholder.typicode.com/posts/${context.params.id}`)
+
+//     const article = await res.json()
+
+//     return {
+//         props: {
+//             article
+//         }
+//     }
+// }
+
+
+// // In order for getStaticPaths to work, you need to implement getStaticProps in the same file, and return the data for each individual page as props.
+// export const getStaticPaths = async () => {
+//     const res = await fetch(`https:/jsonplaceholder.typicode.com/posts?_limit=6`)
+
+//     const articles = await res.json()
+//     console.log(articles)
+//     // getting ids of each article
+//     const ids = articles.map((article: any) => article.id)
+//     const paths = ids.map((id: any) => ({
+//         params: {id: id.toString()}
+//     }))
+//     return {
+//         paths: paths,
+//         // returns a 404 page if we go to something that doesnt exist
+//         fallback: false,
+
+//     }
 }
