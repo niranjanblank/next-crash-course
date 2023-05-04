@@ -66,7 +66,7 @@ export const getStaticProps = async (context: any) => {
 
 // In order for getStaticPaths to work, you need to implement getStaticProps in the same file, and return the data for each individual page as props.
 export const getStaticPaths = async () => {
-    const res = await fetch(`https:\jsonplaceholder.typicode.com/posts`)
+    const res = await fetch(`https:/jsonplaceholder.typicode.com/posts?_limit=6`)
 
     const articles = await res.json()
     console.log(articles)
